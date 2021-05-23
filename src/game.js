@@ -1,9 +1,13 @@
-import {
-  cons, car, cdr,
-} from '@hexlet/pairs';
+import { cons, car } from '@hexlet/pairs';
 import {
   cons as consList, l, random, head, reverse,
 } from '@hexlet/pairs-data';
+import { typeTag } from '@hexlet/tagged-types';
+import { getName as getSimpleCardName, damage as simpleCardDamage } from './cardTypes/simpleCard.js';
+import { getName as getPercentCardName, damage as percentCardDamage } from './cardTypes/percentCard.js';
+
+const isSimpleCard = (card) => typeTag(card) === 'SimpleCard';
+// const isPercentCard = (card) => typeTag(card) === 'PercentCard';
 
 const run = (player1, player2, cards, customRandom) => {
   const iter = (health1, name1, health2, name2, order, log) => {
@@ -12,8 +16,22 @@ const run = (player1, player2, cards, customRandom) => {
     }
 
     const card = customRandom(cards);
-    const cardName = car(card);
-    const damage = cdr(card)(health2);
+
+    const cardName = isSimpleCard(card) ? getSimpleCardName(card) : getPercentCardName(card);
+    const damage = isSimpleCard(card) ? simpleCardDamage(card) : percentCardDamage(card, health2);
+
+    // let cardName;
+    // let damage;
+    //
+    // if (isSimpleCard(card)) {
+    //   cardName = getSimpleCardName(card);
+    //   damage = simpleCardDamage(card);
+    // }
+    // if (isPercentCard(card)) {
+    //   cardName = getPercentCardName(card);
+    //   damage = percentCardDamage(card, health2);
+    // }
+
     const newHealth = health2 - damage;
     const message = `Player ${name1} used ${cardName} against ${name2} and caused ${damage} damage`;
 
