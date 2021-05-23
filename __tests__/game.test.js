@@ -49,3 +49,42 @@ describe('CardGame', () => {
     expect(pairToString(car(step5))).toBe('(5, 0)');
   });
 });
+
+describe('CardGame 2', () => {
+  const cards = l(
+    cons('Ruby Infused Vessel', () => 7),
+    cons('Deathsong, Crystal of Echoes', (health) => Math.round(health * 0.8)),
+  );
+
+  test('CardGame', () => {
+    let cardIndex = 1;
+    const game = make(cards, (c) => {
+      cardIndex = cardIndex === 0 ? 1 : 0;
+      return get(cardIndex, c);
+    });
+    const log = game('John', 'Ada');
+
+    expect(length(log)).toBe(5);
+
+    const step1 = get(0, log);
+    expect(pairToString(car(step1))).toBe('(10, 10)');
+
+    const step2 = get(1, log);
+    expect(pairToString(car(step2))).toBe('(10, 3)');
+
+    const step3 = get(2, log);
+    expect(pairToString(car(step3))).toBe('(2, 3)');
+
+    const step4 = get(3, log);
+    expect(pairToString(car(step4))).toBe('(2, -4)');
+
+    const step5 = get(4, log);
+    expect(pairToString(car(step5))).toBe('(2, -4)');
+  });
+
+  test('default', () => {
+    const game = make(cards);
+    const log = game('John', 'Ada');
+    expect(log).not.toBeUndefined();
+  });
+});
