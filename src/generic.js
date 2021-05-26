@@ -1,6 +1,6 @@
 import { cons, car, cdr } from '@hexlet/pairs';
 import {
-  cons as consList, l, head, tail,
+  cons as consList, l, head, tail, isEmpty,
 } from '@hexlet/pairs-data';
 import { attach, typeTag, contents } from '@hexlet/tagged-types';
 
@@ -9,6 +9,9 @@ let methods = l();
 export const getMethod = (obj, methodName) => {
   const type = typeTag(obj);
   const iter = (methodsList) => {
+    if (isEmpty(methodsList)) {
+      return null;
+    }
     const current = head(methodsList);
     const rest = tail(methodsList);
     const currentName = car(contents(current));
