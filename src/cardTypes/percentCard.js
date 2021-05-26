@@ -1,8 +1,11 @@
 import { cons, car, cdr } from '@hexlet/pairs';
-import { attach, contents } from '@hexlet/tagged-types';
+import { attach } from '@hexlet/tagged-types';
+import { definer } from '../generic.js';
 
-export const make = (name, percent) => attach('PercentCard', cons(name, percent));
+const defmethod = definer('PercentCard');
+const make = (name, percent) => attach('PercentCard', cons(name, percent));
 
-export const getName = (self) => car(contents(self));
+export default make;
 
-export const damage = (self, health) => Math.round(health * (cdr(contents(self)) / 100));
+defmethod('getName', (self) => car(self));
+defmethod('damage', (self, health) => Math.round(health * (cdr(self) / 100)));
