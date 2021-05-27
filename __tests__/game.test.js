@@ -1,11 +1,11 @@
 import { l, length, get } from '@hexlet/pairs-data';
-import simpleCard from '../src/cardTypes/simpleCard.js';
-import percentCard from '../src/cardTypes/percentCard.js';
+import SimpleCard from '../src/cardTypes/simpleCard.js';
+import PercentCard from '../src/cardTypes/percentCard.js';
 import make from '../src/game.js';
 
 describe('CardGame', () => {
   it('should work 1', () => {
-    const cards = l(simpleCard('Barbaric Lantern', 6));
+    const cards = l(new SimpleCard('Barbaric Lantern', 6));
     const game = make(cards);
     const log = game('John', 'Ada');
 
@@ -33,7 +33,7 @@ describe('CardGame', () => {
   });
 
   it('should work 2', () => {
-    const cards = l(simpleCard('Haunted Beads', 5));
+    const cards = l(new SimpleCard('Haunted Beads', 5));
     const game = make(cards);
     const log = game('Mike', 'Alan');
 
@@ -63,8 +63,8 @@ describe('CardGame', () => {
 
 describe('CardGame 2', () => {
   const cards = l(
-    simpleCard('Ruby Infused Vessel', 7),
-    percentCard('Deathsong, Crystal of Echoes', 80),
+    new SimpleCard('Ruby Infused Vessel', 7),
+    new PercentCard('Deathsong, Crystal of Echoes', 80),
   );
 
   test('CardGame', () => {
@@ -107,7 +107,7 @@ describe('CardGame 2', () => {
 
 describe('CardGame 3', () => {
   it('#flow 1', () => {
-    const cards = l(simpleCard('Moonbeam', 6));
+    const cards = l(new SimpleCard('Moonbeam', 6));
     const game = make(cards);
     const log = game('John', 'Ada');
 
@@ -137,8 +137,8 @@ describe('CardGame 3', () => {
   it('#flow 2', () => {
     let cardIndex = 1;
     const cards = l(
-      simpleCard('Ruby Infused Vessel', 7),
-      percentCard('Deathsong, Crystal of Echoes', 80),
+      new SimpleCard('Ruby Infused Vessel', 7),
+      new PercentCard('Deathsong, Crystal of Echoes', 80),
     );
     const game = make(cards, (c) => {
       cardIndex = cardIndex === 0 ? 1 : 0;
@@ -172,7 +172,7 @@ describe('CardGame 3', () => {
 
 describe('CardGame 4', () => {
   it('#flow 1', () => {
-    const cards = l(simpleCard('Shadow Strike', 6));
+    const cards = l(new SimpleCard('Shadow Strike', 6));
     const game = make(cards);
     const log = game('John', 'Ada');
 
@@ -203,8 +203,8 @@ describe('CardGame 4', () => {
   it('#flow 2', () => {
     let cardIndex = 2;
     const cards = l(
-      simpleCard('Enchanted Stone', 7),
-      percentCard('Whispersong, Scroll of Twisted Visions', 80),
+      new SimpleCard('Enchanted Stone', 7),
+      new PercentCard('Whispersong, Scroll of Twisted Visions', 80),
     );
     const game = make(cards, (c) => {
       cardIndex = cardIndex === 0 ? 1 : 0;
@@ -239,7 +239,7 @@ describe('CardGame 4', () => {
 
 describe('CardGame 5', () => {
   it('#flow 1', () => {
-    const cards = l(simpleCard('Barbaric Lantern', 5));
+    const cards = l(new SimpleCard('Barbaric Lantern', 5));
     const game = make(cards);
     const log = game('John', 'Ada');
 
@@ -269,8 +269,8 @@ describe('CardGame 5', () => {
   it('#flow 2', () => {
     let cardIndex = 2;
     const cards = l(
-      simpleCard('Enchanted Stone', 7),
-      percentCard('Whispersong, Scroll of Twisted Visions', 80),
+      new SimpleCard('Enchanted Stone', 7),
+      new PercentCard('Whispersong, Scroll of Twisted Visions', 80),
     );
     const game = make(cards, (c) => {
       cardIndex = cardIndex === 0 ? 1 : 0;
@@ -304,8 +304,8 @@ describe('CardGame 5', () => {
   it('#flow 3 (health order in log)', () => {
     let cardIndex = 2;
     const cards = l(
-      simpleCard('Enchanted Stone', 3),
-      simpleCard('Whispersong, Scroll of Twisted Visions', 10),
+      new SimpleCard('Enchanted Stone', 3),
+      new SimpleCard('Whispersong, Scroll of Twisted Visions', 10),
     );
     const game = make(cards, (c) => {
       cardIndex = cardIndex === 0 ? 1 : 0;
